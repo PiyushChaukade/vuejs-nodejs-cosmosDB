@@ -29,7 +29,7 @@
                           auto-grow
                         ></v-textarea>
 
-                        <v-btn class="mt-2" type="submit" block>Submit</v-btn>
+                        <v-btn class="mt-2" type="submit" block>Update Todo</v-btn>
                         <v-btn class="mt-2" @click="canceledForm" block
                           >Cancel</v-btn
                         >
@@ -39,7 +39,7 @@
                 </v-card>
               </v-dialog>
             </v-sheet>
-            <v-sheet><DeleteTodo @click="deleteItem(todos.id)" /></v-sheet>
+            <v-sheet><DeleteTodo  @deleteItems="deleteItem(todos.id)" /></v-sheet>
           </div>
         </v-card>
       </v-col>
@@ -64,9 +64,6 @@ export default {
     id: "",
   }),
   computed: {
-    // ...mapState({
-    //   receivedTodos: state => state.received
-    // }),
     ...mapGetters(["received"]),
   },
   created() {
@@ -83,7 +80,6 @@ export default {
       this.Updateddescription = data.description;
       this.id = data.id;
     },
-    // ...mapActions(["fetchTodos", "updateItem"]),
     async submitForm() {
       this.dialog = false;
       const UpdatedTodo = {
@@ -91,16 +87,12 @@ export default {
         description: this.Updateddescription,
         id: this.id,
       };
-      console.log(UpdatedTodo, "UpdatedTodo");
       await this.updateItem(UpdatedTodo);
       await this.fetchTodos();
     },
     canceledForm() {
       this.dialog = false;
     },
-    //   created(){
-
-    // }
   },
 };
 </script>

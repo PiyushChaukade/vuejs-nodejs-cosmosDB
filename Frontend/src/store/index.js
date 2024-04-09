@@ -22,7 +22,7 @@ export default createStore({
       try {
         // Make an API request to fetch todos
         const response = await axios.get(
-          "http://localhost:4800/todolist/fetchtodo"
+          "http://localhost:5001/todolist/fetchtodo"
         );
         commit("SET_RECEIVED", response.data);
       } catch (error) {
@@ -32,7 +32,7 @@ export default createStore({
     async addTodo({ commit, state }, data) {
       try {
         const response = await axios.post(
-          "http://localhost:4800/todolist/addtodo",
+          "http://localhost:5001/todolist/addtodo",
           data
         );
         commit("SET_TODOS", [...state.todos, response.data]);
@@ -44,10 +44,10 @@ export default createStore({
     async deleteTodo({ commit }, todoId) {
       try {
         await axios.delete(
-          `http://localhost:4800/todolist/deletetodo/${todoId}`
+          `http://localhost:5001/todolist/deletetodo/${todoId}`
         );
         const response = await axios.get(
-          "http://localhost:4800/todolist/fetchtodo"
+          "http://localhost:5001/todolist/fetchtodo"
         );
         commit("SET_RECEIVED", response.data);
       } catch (error) {
@@ -56,9 +56,8 @@ export default createStore({
     },
     async updateItem({ commit }, data) {
       try {
-        console.log(data, "data");
         const response = await axios.put(
-          `http://localhost:4800/todolist/updatetodo/${data.id}`,
+          `http://localhost:5001/todolist/updatetodo/${data.id}`,
           data
         );
         const newTodos = response.data;

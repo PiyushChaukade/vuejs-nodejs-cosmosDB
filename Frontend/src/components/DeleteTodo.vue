@@ -4,9 +4,10 @@
       color="red-lighten-2"
       icon="mdi-trash-can-outline"
       variant="text"
+      @click="deleteDialog=true"
     ></v-btn>
 
-    <!-- <v-dialog v-model="deleteDialog" max-width="500">
+    <v-dialog v-model="deleteDialog" max-width="500">
       <v-card>
         <v-card-title>Delete Todo</v-card-title>
         <v-card-text> Are you sure you want to delete this todo? </v-card-text>
@@ -15,7 +16,7 @@
           <v-btn color="error" @click="cancelDelete">No</v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog> -->
+    </v-dialog>
   </v-container>
 </template>
 
@@ -28,22 +29,17 @@ export default {
   },
   components: {},
   data: () => ({
-    // deleteDialog: false,
+    deleteDialog: false,
   }),
   methods: {
-  //   ...mapActions([ "deleteTodo"]),
-  //   deleteTodoDialog() {
-  //     this.deleteDialog = true;
-  //   },
-  //   cancelDelete() {
-  //     this.deleteDialog = false;
-  //   },
-  //  async deleteTodo(){
-  //     this.deleteDialog = false;
-  //     console.log(this.todos.id,'this.todos.id')
-  //     await this.deleteTodo(this.todos.id);
+    cancelDelete() {
+      this.deleteDialog = false;
+    },
+   async deleteTodo(){
+      this.deleteDialog = false;
+    this.$emit('deleteItems')
       
-  //   }
+    }
   
   },
 };
